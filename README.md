@@ -1,4 +1,4 @@
-# İşe Alım Tahmin API
+# İşe Alımda Aday Seçimi: SVM ile Başvuru Değerlendirme
 
 Bu API, SVM (Support Vector Machine) modeli kullanarak işe alım tahminleri yapar. Model, adayların tecrübe yılı ve teknik puanlarına göre işe alınıp alınmayacaklarını tahmin eder.
 

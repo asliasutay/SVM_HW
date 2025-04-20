@@ -40,9 +40,7 @@ df = create_data()
 df.info()
 df.describe()
 
-
 #veri seti görselleştirilmesi
-
 alindi = df[df["etiket"] == 0]
 alinmadi = df[df["etiket"] == 1]
 
@@ -54,15 +52,13 @@ plt.scatter(alindi["tecrube_yili"], alindi["teknik_puan"], color="green", label=
 # Başarısız adaylar (etiket = 1)
 plt.scatter(alinmadi["tecrube_yili"], alinmadi["teknik_puan"], color="red", label="İşe alınmadı", alpha=0.6)
 
-# Etiketler ve başlık
 plt.xlabel("Tecrübe Yılı")
 plt.ylabel("Teknik Puan")
 plt.title("Adayların Tecrübe ve Teknik Puanlarına Göre İşe Alım Durumu")
 plt.legend()
 plt.grid(True)
 plt.savefig('veri_gorsellestirme.png')
-plt.close()
-
+plt.show()
 
 # Özellikler ve hedef değişken
 X = df[['tecrube_yili', 'teknik_puan']]
@@ -84,7 +80,7 @@ model.fit(X_train_scaled, y_train)
 y_pred = model.predict(X_test_scaled)
 
 
-# Karar sınırını görselleştir
+# Karar sınırını görselleştirme
 def plot_decision_boundary():
     x_min, x_max = X_train_scaled[:, 0].min() - 1, X_train_scaled[:, 0].max() + 1
     y_min, y_max = X_train_scaled[:, 1].min() - 1, X_train_scaled[:, 1].max() + 1
@@ -102,9 +98,11 @@ def plot_decision_boundary():
     plt.savefig('karar_siniri_linear.png')
     plt.close()
 
-
 # Karar sınırını çiz
 plot_decision_boundary()
+'''Modelin karar sınırı mantıklı ve beklendiği gibi.
+Karar sınırının eğimi, oluşturulan (2 yıldan az ve 60 puandan düşük) kurala 
+benzer şekilde düşük tecrübeye ve düşük puana sahip adayları ayıracak biçimde eğilmiş.'''
 
 # Accuracy
 accuracy = accuracy_score(y_test, y_pred)

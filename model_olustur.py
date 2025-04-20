@@ -104,6 +104,22 @@ plot_decision_boundary()
 Karar sınırının eğimi, oluşturulan (2 yıldan az ve 60 puandan düşük) kurala 
 benzer şekilde düşük tecrübeye ve düşük puana sahip adayları ayıracak biçimde eğilmiş.'''
 
+# Kullanıcıdan girdi alıp tahmin yapma fonksiyonu
+def prediction_function(tecrube_yili, teknik_puan):
+    yeni_veri = [[tecrube_yili, teknik_puan]]
+    tahmin = model.predict(yeni_veri)[0]
+    return "İşe Alınmadı" if tahmin == 1 else "İşe Alındı"
+
+# Örnek kullanım
+if __name__ == "__main__":
+    print("\nÖrnek Tahminler:")
+    print("Tecrübe: 1 yıl, Teknik Puan: 35 ->", prediction_function(1, 35))
+    print("Tecrübe: 5 yıl, Teknik Puan: 80 ->", prediction_function(5, 80))
+
+'''Örnek Tahminler:
+Tecrübe: 1 yıl, Teknik Puan: 35 -> İşe Alınmadı
+Tecrübe: 5 yıl, Teknik Puan: 80 -> İşe Alındı'''
+
 # Accuracy
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Linear Kernel Doğruluğu: {accuracy}")

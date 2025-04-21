@@ -10,7 +10,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Model ve scaler'ı yükle
+# Model ve scaler'ı yükledik
 try:
     model = joblib.load('svm_model_rbf.joblib')
     scaler = joblib.load('scaler.joblib')
@@ -33,16 +33,16 @@ async def root():
 @app.post("/tahmin", response_model=PredictionOutput)
 async def tahmin_yap(input_data: PredictionInput):
     try:
-        # Girdiyi numpy dizisine dönüştür
+        # Girdiyi numpy dizisine dönüştürdük
         input_array = np.array([[input_data.tecrube_yili, input_data.teknik_puan]])
         
-        # Veriyi ölçekle
+        # Veriyi ölçekledik
         input_scaled = scaler.transform(input_array)
         
-        # Tahmin yap
+        # Tahmin yaptık
         tahmin = model.predict(input_scaled)[0]
         
-        # Sonucu hazırla
+        # Sonucu hazırladık
         sonuc = "İşe Alınmadı" if tahmin == 1 else "İşe Alındı"
         
         return PredictionOutput(
@@ -57,3 +57,4 @@ async def tahmin_yap(input_data: PredictionInput):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000) 
+

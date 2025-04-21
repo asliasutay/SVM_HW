@@ -143,6 +143,13 @@ plt.close()
 report = classification_report(y_test, y_pred, target_names=["İşe Alındı (0)", "İşe Alınmadı (1)"])
 print("\nClassification Report:")
 print(report)
+#'''Classification Report:
+#                  precision    recall  f1-score   support
+#  İşe Alındı (0)       1.00      0.94      0.97        18
+#İşe Alınmadı (1)       0.67      1.00      0.80         2
+#       accuracy                           0.95        20
+#       macro avg       0.83      0.97      0.89        20
+#    weighted avg       0.97      0.95      0.95        20'''
 
 # Kernel'i 'rbf' (Radial Basis Function) olarak değiştirme
 model_rbf = SVC(kernel='rbf', C=1, gamma='scale')
@@ -171,7 +178,8 @@ def plot_decision_boundary_rbf():
 
 plot_decision_boundary_rbf()
 
-# Parametreler
+# Parametreler (en iyi parametreyi buluyoruz)
+#SVM modelini optimize etmek için denenecek farklı C, gamma ve kernel hiperparametre değerleri
 param_grid = {
     'C': [0.1, 1, 10, 100],
     'gamma': ['scale', 'auto', 0.1, 1],
@@ -184,6 +192,7 @@ grid_search.fit(X_train_scaled, y_train)
 
 # En iyi parametreler
 print("En İyi Parametreler:", grid_search.best_params_)
+##En İyi Parametreler: {'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}
 
 # En iyi model
 best_model = grid_search.best_estimator_
